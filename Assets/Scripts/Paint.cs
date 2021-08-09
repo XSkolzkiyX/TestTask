@@ -16,11 +16,12 @@ public class Paint : MonoBehaviour
         CurrentBrush.transform.parent = transform;
 
         Shoes = new GameObject("Shoes ¹" + NumOfShoes);
+        Shoes.AddComponent<SkinnedMeshRenderer>();
     }
 
     void FixedUpdate()
 	{
-        if(Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0))
         {
             //Brush
             NumOfBrush++;
@@ -28,6 +29,7 @@ public class Paint : MonoBehaviour
             Brush.name = "Brush ¹" + NumOfBrush;
             Brush.transform.position = Input.mousePosition;
             Brush.transform.parent = CurrentBrush.transform;
+
             //Shoe
             GameObject Shoe = GameObject.CreatePrimitive(PrimitiveType.Sphere);
             Shoe.transform.position = Camera.main.ScreenToViewportPoint(Input.mousePosition);
@@ -36,21 +38,8 @@ public class Paint : MonoBehaviour
             ShoeMaterial.color = Color.black;
             Shoe.GetComponent<MeshRenderer>().material = ShoeMaterial;
             Shoe.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-            /*if(NumOfBrush>1)
-            {
-                LineRenderer Line =  Brush.AddComponent<LineRenderer>();
-                List<Vector3> pos = new List<Vector3>();
-                float LastBrush = NumOfBrush - 1;
-                pos.Add(Camera.main.ScreenToViewportPoint(GameObject.Find("Brush ¹" + LastBrush).transform.position));
-                pos.Add(Camera.main.ScreenToViewportPoint(GameObject.Find("Brush ¹" + NumOfBrush).transform.position));
-                //LineRenderer Connection = new GameObject("Connect btw" + CurrentPointInRoute + " & " + LastPointInRoute + " in " + CurrentRoute + " route").AddComponent<LineRenderer>();
-                Line.material = new Material(Shader.Find("Sprites/Default"));
-                Line.SetColors(Color.black, Color.black);
-                Line.SetWidth(1f, 1f);
-                Line.SetPositions(pos.ToArray());
-            }*/
         }
-        else if(Input.GetMouseButtonUp(0))
+        else if (Shoes.transform.childCount > 0)
         {
             NumOfBrush = 0;
             for (int i = 0; i < CurrentBrush.transform.childCount; i++)
@@ -64,12 +53,21 @@ public class Paint : MonoBehaviour
     void SetShoes()
     {
         int LastShoes = NumOfShoes - 1;
-        if(GameObject.Find("Shoes ¹" + LastShoes) !=null)        
+        if (GameObject.Find("Shoes ¹" + LastShoes) != null && GameObject.Find("ShoesClone" + LastShoes) != null)
         {
-            GameObject.Find("Shoes ¹" + LastShoes).SetActive(false);
+            //GameObject.Find("Shoes ¹" + LastShoes).SetActive(false);
+            //GameObject.Find("ShoesClone" + LastShoes).SetActive(false);
+            Destroy(GameObject.Find("Shoes ¹" + LastShoes));
+            Destroy(GameObject.Find("ShoesClone" + LastShoes));
         }
-        Shoes.transform.position = PlayerFeet.transform.position;
+        Shoes.transform.position = new Vector3(PlayerFeet.transform.position.x, PlayerFeet.transform.position.y, PlayerFeet.transform.position.z);
         Shoes.transform.parent = PlayerFeet.transform;
+        Shoes.AddComponent<ShoesScript>().LegID = 1;
+        GameObject ShoesClone = Instantiate(Shoes);
+        ShoesClone.name = "ShoesClone" + NumOfShoes;
+        ShoesClone.transform.position = new Vector3(PlayerFeet.transform.position.x, PlayerFeet.transform.position.y, PlayerFeet.transform.position.z);
+        ShoesClone.transform.parent = PlayerFeet.transform;
+        ShoesClone.AddComponent<ShoesScript>().LegID = 2;
         NumOfShoes++;
         Shoes = new GameObject("Shoes ¹" + NumOfShoes);
     }
