@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Collections;
-using Unity.UI;
 using System.Collections.Generic;
 
 public class Paint : MonoBehaviour
@@ -21,23 +20,32 @@ public class Paint : MonoBehaviour
 
     void FixedUpdate()
 	{
+        //if (Input.touchCount > 0)
         if (Input.GetMouseButton(0))
         {
-            //Brush
-            NumOfBrush++;
-            GameObject Brush = Instantiate(BrushPrefab);
-            Brush.name = "Brush ¹" + NumOfBrush;
-            Brush.transform.position = Input.mousePosition;
-            Brush.transform.parent = CurrentBrush.transform;
+            //Touch touch = Input.GetTouch(0);
+            //if (touch.phase == TouchPhase.Moved)
+            //{
+                //Vector2 pos = touch.position;
 
-            //Shoe
-            GameObject Shoe = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-            Shoe.transform.position = Camera.main.ScreenToViewportPoint(Input.mousePosition);
-            Shoe.transform.parent = Shoes.transform;
-            Material ShoeMaterial = new Material(ShoeShader);
-            ShoeMaterial.color = Color.black;
-            Shoe.GetComponent<MeshRenderer>().material = ShoeMaterial;
-            Shoe.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+                //Brush
+                NumOfBrush++;
+                GameObject Brush = Instantiate(BrushPrefab);
+                Brush.name = "Brush ¹" + NumOfBrush;
+                //Brush.transform.position = pos;
+                Brush.transform.position = Input.mousePosition;
+                Brush.transform.parent = CurrentBrush.transform;
+
+                //Shoe
+                GameObject Shoe = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+                Shoe.transform.position = Camera.main.ScreenToViewportPoint(Input.mousePosition);
+                //Shoe.transform.position = Camera.main.ScreenToViewportPoint(pos);
+                Shoe.transform.parent = Shoes.transform;
+                Material ShoeMaterial = new Material(ShoeShader);
+                ShoeMaterial.color = Color.black;
+                Shoe.GetComponent<MeshRenderer>().material = ShoeMaterial;
+                Shoe.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+            //}
         }
         else if (Shoes.transform.childCount > 0)
         {

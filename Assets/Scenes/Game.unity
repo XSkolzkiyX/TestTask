@@ -311,7 +311,6 @@ MonoBehaviour:
   PlayerFeet: {fileID: 538876036}
   BrushPrefab: {fileID: 8765029694791166930, guid: 5275994e2f019b840b96b6da47192f10, type: 3}
   ShoeShader: {fileID: 53, guid: 0000000000000000f000000000000000, type: 0}
-  StartInput: 0
 --- !u!1 &299870025
 GameObject:
   m_ObjectHideFlags: 0
@@ -486,8 +485,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.32144538, y: 1.2, z: 0.2}
-  m_Center: {x: 0.012362339, y: 0.8000001, z: 4.6365154e-17}
+  m_Size: {x: 0.32144538, y: 1.346287, z: 0.2}
+  m_Center: {x: 0.012362331, y: 0.7268566, z: 4.636526e-17}
 --- !u!4 &538876039 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4475381549599444, guid: c20158afae7a5854681c1c8c31dfed9b, type: 3}
@@ -520,8 +519,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.3400806, y: 0.11767904, z: 0.2064721}
-  m_Center: {x: -0.004075378, y: 0.14754774, z: 0.004556559}
+  m_Size: {x: 0.3400806, y: 0.14099568, z: 0.2064721}
+  m_Center: {x: -0.004075378, y: 0.09073521, z: 0.004556559}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
